@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#090d19">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Droid2iOS</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="app">
+
+<header>
+    <div class="brand">
+        <div class="logo">D2</div>
+        <div>
+            <h1>Droid2iOS</h1>
+            <p>ANDROID TO IOS WORKSPACE</p>
+        </div>
+    </div>
+    <div class="status">● READY</div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="eyebrow">YOUR APP CONVERSION STUDIO</div>
+        <h2>Android apps.<br><span>iOS possibilities.</span></h2>
+        <p>Analyze APK files and prepare supported apps for iOS rebuilding.</p>
+    </section>
+
+    <section class="upload-card">
+        <div class="upload-icon">↑</div>
+        <h3>Import APK</h3>
+        <p>Select an Android application package to begin analysis.</p>
+
+        <input type="file" id="apkInput"
+               accept=".apk,application/vnd.android.package-archive"
+               hidden>
+
+        <button id="uploadButton" class="primary">
+            Choose APK File
+        </button>
+
+        <div class="formats">SUPPORTED FILE: .APK</div>
+    </section>
+
+    <section id="results" class="results hidden">
+        <h3>APK Analysis</h3>
+        <div id="fileInfo"></div>
+        <div id="analysis"></div>
+        <button id="resetButton" class="secondary">
+            Analyze Another APK
+        </button>
+    </section>
+
+    <section class="features">
+        <h3>Workspace</h3>
+        <div class="feature">
+            <span>◈</span>
+            <div>
+                <strong>APK Analyzer</strong>
+                <p>Inspect application package contents.</p>
+            </div>
+            <small>ACTIVE</small>
+        </div>
+
+        <div class="feature">
+            <span>▧</span>
+            <div>
+                <strong>Resource Extractor</strong>
+                <p>Prepare images and application assets.</p>
+            </div>
+            <small>PLANNED</small>
+        </div>
+
+        <div class="feature">
+            <span>⌘</span>
+            <div>
+                <strong>iOS Rebuilder</strong>
+                <p>Reconstruct supported app functionality.</p>
+            </div>
+            <small>PLANNED</small>
+        </div>
+
+        <div class="feature">
+            <span>◇</span>
+            <div>
+                <strong>IPA Export</strong>
+                <p>Prepare signed iOS application packages.</p>
+            </div>
+            <small>PLANNED</small>
+        </div>
+    </section>
+</main>
+
+<footer>
+    DROID2IOS · VERSION 0.1.0
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
