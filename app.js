@@ -62,11 +62,16 @@ apkInput.addEventListener("change", async () => {
         const manifest = zip.files["AndroidManifest.xml"];
 
         let manifestType = "Binary or unrecognized XML";
+        let manifestDetails = null;
 
         const manifestText = await manifest.async("text");
 
         if (manifestText.trim().startsWith("<")) {
             manifestType = "Readable XML";
+            if (!window.Droid2iOSManifestParser) {
+                throw new Error("Manifest parser failed to load.");
+            }
+            manifestDetails = window.Droid2iOSManifestParser.parse(manifestText);
         }
 
         fileInfo.innerHTML = `
@@ -83,14 +88,36 @@ apkInput.addEventListener("change", async () => {
         const checks = [
             ["ZIP archive", "Valid"],
             ["Android manifest", "Found"],
-            ["Manifest format", manifestType],
+            ["Manifest format", manifestType]
+        ];
+
+        if (manifestDetails) {
+            checks.push(
+                ["Package name", manifestDetails.packageName],
+                ["Version code", manifestDetails.versionCode],
+                ["Version name", manifestDetails.versionName],
+                ["Minimum Android SDK", manifestDetails.minSdk],
+                ["Target Android SDK", manifestDetails.targetSdk],
+                ["Application label", manifestDetails.appLabel],
+                ["Application icon", manifestDetails.appIcon],
+                ["Declared permissions", manifestDetails.permissions.length]
+            );
+        } else {
+            checks.push(["Manifest metadata", "Binary format not yet supported"]);
+        }
+
+        checks.push(
             ["DEX files", dexFiles.length],
             ["Native libraries", nativeLibraries.length],
             ["Resource files", resources.length],
             ["Asset files", assets.length],
             ["Potential icons", icons.length],
             ["Total archive entries", entries.length]
-        ];
+        );
+
+        if (manifestDetails && manifestDetails.permissions.length) {
+            checks.push(["Permissions list", manifestDetails.permissions.join(", ")]);
+        }
 
         analysis.innerHTML = checks.map(([name, value]) => `
             <div class="result-item">
